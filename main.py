@@ -12,7 +12,7 @@ db = SQLAlchemy(app)
 
 class LetterboxModel(db.Model):
 
-        __tablename__ = 'letterboxes'
+        __tablename__ = 'letterbox'
         id = db.Column(db.Integer, primary_key=True)
         username = db.Column(db.String(40))
         status = db.Column(db.String(40))
