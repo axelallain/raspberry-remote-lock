@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:@localhost:5432/rasp'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:postgres@192.168.1.17:5432/rasp'
 db = SQLAlchemy(app)
 
 class LetterboxModel(db.Model):
@@ -52,4 +52,4 @@ def lock():
 
 
 if __name__ == "__main__":
-            app.run()
+            app.run(host='0.0.0.0')

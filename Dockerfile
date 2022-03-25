@@ -12,9 +12,9 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
-ENV PORT=5000
+ENV PORT=5143
 
-EXPOSE 5000
+EXPOSE 5143
 
 ENTRYPOINT [ "python3" ]
 
