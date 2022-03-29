@@ -42,12 +42,12 @@ class LetterboxModel(db.Model):
 
     __tablename__ = 'letterbox'
     id = db.Column(db.Integer, primary_key=True)
-    rent = db.relationship('RentModel', backref='letterbox', lazy=True)
+    rents = db.relationship('RentModel', backref='letterbox', lazy=True)
     status = db.Column(db.String(40))
 
-    def __init__(self, id, rent, status):
+    def __init__(self, id, rents, status):
         self.id = id
-        self.rent = rent
+        self.rents = rents
         self.status = status
 
 
