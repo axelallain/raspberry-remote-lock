@@ -8,8 +8,8 @@ import RPi.GPIO as GPIO
 relay = 18
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setuprelay(GPIO.OUT)
-GPIO.output(relay , 0)
+GPIO.setup(relay, GPIO.OUT)
+GPIO.output(relay, GPIO.LOW)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -78,14 +78,14 @@ def lock():
         letterbox.status = 'unlocked'
         db.session.commit()
         logging.info('User ' + username + ' unlocked letterbox ' + str(letterbox.id) + ' linked to the rent ' + str(rent_id))
-        GPIO.output(relay , 1)
+        GPIO.output(relay, GPIO.HIGH)
         return "Unlocked"
 
     elif rent.username == username and letterbox.status == 'unlocked' and rent.status == 'ongoing':
         letterbox.status = 'locked'
         db.session.commit()
         logging.info('User ' + username + ' locked letterbox ' + str(letterbox.id) + ' linked to the rent ' + str(rent_id))
-        GPIO.output(relay, 0)
+        GPIO.output(relay, GPIO.LOW)
         return "Locked"
 
     else:
