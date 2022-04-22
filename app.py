@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
 import logging
+import os
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 import RPi.GPIO as GPIO
+
+load_dotenv()
 
 relay = 18
 GPIO.setwarnings(False)
@@ -13,8 +17,16 @@ GPIO.output(relay , 0)
 
 logging.basicConfig(level=logging.INFO)
 
+dbusername = os.getenv("dbusername")
+dbpassword = os.getenv("dbpassword")
+dbhost = os.getenv("dbhost")
+dbport = os.getenv("dbport")
+dbname = os.getenv("dbname")
+
+dburl = f'postgresql://{dbusername}:{dbpassword}@{dbhost}:{dbport}/{dbname}'
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:postgres@192.168.1.17:5432/rasp'
+app.config['SQLALCHEMY_DATABASE_URI']=dburl
 db = SQLAlchemy(app)
 
 class GoogleUserModel(db.Model):

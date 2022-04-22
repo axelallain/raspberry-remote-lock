@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 RUN apt update -y && \
+    apt upgrade -y && \
     apt install -y python3-pip && \
     apt install -y libpq-dev python3-dev
 
@@ -9,6 +10,7 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN pip3 install -r requirements.txt
+RUN pip3 install RPi.GPIO
 
 COPY . /app
 
